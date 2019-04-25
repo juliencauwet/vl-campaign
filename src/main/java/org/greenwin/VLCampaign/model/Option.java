@@ -1,19 +1,25 @@
 package org.greenwin.VLCampaign.model;
 
-import org.springframework.data.annotation.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Option {
 
     @Id
     @GeneratedValue
-    int id;
+    private int id;
 
     private String option;
 
     @ManyToOne
+    @JoinColumn(name = "campaign")
     private Campaign campaign;
 
 }

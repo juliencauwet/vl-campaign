@@ -11,12 +11,12 @@ services:
   db-campaign:
     image: postgres:alpine
     ports:
-      - '8741:5432'
-    container_name: dbtopics
+      - '8742:5432'
+    container_name: dbcampaign
     environment:
-      POSTGRES_DB: db_VL-topics
-      POSTGRES_USER: usr_topics
-      POSTGRES_PASSWORD: topics
+      POSTGRES_DB: db_VL-campaign
+      POSTGRES_USER: usr_campaign
+      POSTGRES_PASSWORD: campaign
     volumes:
       - './sql:/docker-entrypoint-initdb.d'
     restart: always

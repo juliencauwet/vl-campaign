@@ -26,9 +26,11 @@ public class Vote {
     private LocalDate date;
 
     @ManyToOne
-    @JoinColumn(name = "vote")
+    @JoinColumn(name = "campaign")
     private  Campaign campaign;
 
+    @ManyToOne
+    @JoinColumn(name = "option")
     private Option option;
 
 

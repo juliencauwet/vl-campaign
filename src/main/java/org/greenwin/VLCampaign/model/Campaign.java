@@ -21,18 +21,20 @@ public class Campaign {
     @GeneratedValue
     private int id;
 
+    @Transient
     private Topic topic;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cam")
+    private int TopicId;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "campaign")
     Set<Vote> votes = new HashSet<>();
 
     private LocalDate startDate;
 
     private LocalDate endDate;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "topic")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "campaign")
     private List<Option> options;
 
-    private Option result;
 
 }
