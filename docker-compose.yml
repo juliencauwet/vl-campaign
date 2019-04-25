@@ -1,0 +1,23 @@
+version: '2'
+services:
+  #topics:
+  #  container_name: topics
+  #  build:
+  #    context: .
+  #  image: jaycecordon/vltopics:0.0.1-SNAPSHOT
+  #  ports:
+  #    - "8641:8641"
+
+  db-campaign:
+    image: postgres:alpine
+    ports:
+      - '8741:5432'
+    container_name: dbtopics
+    environment:
+      POSTGRES_DB: db_VL-topics
+      POSTGRES_USER: usr_topics
+      POSTGRES_PASSWORD: topics
+    volumes:
+      - './sql:/docker-entrypoint-initdb.d'
+    restart: always
+    network_mode: bridge
