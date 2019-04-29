@@ -1,4 +1,4 @@
 package org.greenwin.VLCampaign.proxies;
 
-public class TopicProxy {
+public interface TopicProxy {
 }
