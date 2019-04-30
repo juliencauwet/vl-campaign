@@ -1,9 +1,10 @@
-package org.greenwin.VLCampaign.services;
+package org.greenwin.VLCampaign.services.impl;
 
 import org.greenwin.VLCampaign.beans.AppUser;
 import org.greenwin.VLCampaign.model.Vote;
 import org.greenwin.VLCampaign.proxies.UserProxy;
 import org.greenwin.VLCampaign.repository.VoteRepository;
+import org.greenwin.VLCampaign.services.IVoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class VoteService {
+public class VoteService implements IVoteService {
 
     @Autowired
     private VoteRepository voteRepository;

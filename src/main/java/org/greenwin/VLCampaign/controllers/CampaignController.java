@@ -1,11 +1,14 @@
 package org.greenwin.VLCampaign.controllers;
 
 import org.greenwin.VLCampaign.model.Campaign;
-import org.greenwin.VLCampaign.services.CampaignService;
+import org.greenwin.VLCampaign.services.impl.CampaignService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/campaign")
@@ -37,5 +40,12 @@ public class CampaignController {
         logger.info("### getCampaignById method ###");
         return campaignService.findById(id);
     }
+
+    @GetMapping("/recent")
+    public List<Campaign> getMostRecentCampaigns(){
+        logger.info("### getMostRecentCampaigns method ###");
+        return campaignService.getnMostRecent(3);
+    }
+
 
 }

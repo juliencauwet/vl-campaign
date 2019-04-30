@@ -12,5 +12,4 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
 
     Vote getById(int id);
 
-    List<Vote> findAllByUserId(int id);
 }

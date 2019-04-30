@@ -2,7 +2,7 @@ package org.greenwin.VLCampaign.controllers;
 
 
 import org.greenwin.VLCampaign.model.Vote;
-import org.greenwin.VLCampaign.services.VoteService;
+import org.greenwin.VLCampaign.services.impl.VoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

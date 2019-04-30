@@ -51,8 +51,24 @@ public class VlCampaignApplication implements CommandLineRunner {
 
 		Campaign campaign1 = new Campaign();
 		campaign1.setTopicId(1);
-		campaign1.setStartDate(LocalDate.of(2019, 5, 1));
-		campaign1.setEndDate(LocalDate.of(2019, 7,31));
+		campaign1.setStartDate(LocalDate.of(2019, 6, 1));
+		campaign1.setEndDate(LocalDate.of(2019, 8,31));
+
+		Campaign campaign2 = new Campaign();
+		campaign2.setTopicId(2);
+		campaign2.setStartDate(LocalDate.of(2019, 5, 1));
+		campaign2.setEndDate(LocalDate.of(2019, 7,31));
+
+		Campaign campaign3 = new Campaign();
+		campaign3.setTopicId(3);
+		campaign3.setStartDate(LocalDate.of(2019, 7, 1));
+		campaign3.setEndDate(LocalDate.of(2019, 7,31));
+
+		Campaign campaign4 = new Campaign();
+		campaign4.setTopicId(4);
+		campaign4.setStartDate(LocalDate.of(2019, 10, 1));
+		campaign4.setEndDate(LocalDate.of(2019, 11,30));
+
 
 		Vote vote1 = new Vote(1, campaign1, pos);
 		Vote vote2 = new Vote(2, campaign1, neg);
@@ -63,6 +79,10 @@ public class VlCampaignApplication implements CommandLineRunner {
 		optionRepository.save(white);
 
 		campaignRepository.save(campaign1);
+		campaignRepository.save(campaign2);
+		campaignRepository.save(campaign3);
+		campaignRepository.save(campaign4);
+
 
 		voteRepository.save(vote1);
 		voteRepository.save(vote2);
