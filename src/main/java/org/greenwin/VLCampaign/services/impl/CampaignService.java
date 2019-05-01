@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -25,6 +24,11 @@ public class CampaignService implements ICampaignService {
         return campaignRepository.findById(id);
     }
 
+    /**
+     *
+     * @param n
+     * @return n most recent campaigns
+     */
     public List<Campaign> getnMostRecent(int n){
 
         List<Campaign> allCampaigns = new ArrayList<>();
@@ -36,5 +40,23 @@ public class CampaignService implements ICampaignService {
 
         return toDisplay;
     }
+
+    /**
+     *
+     * @param n
+     * @return n most popular campaigns
+     */
+    @Override
+    public List<Campaign> getnMostPopular(int n) {
+        List<Campaign> allCampaigns = new ArrayList<>();
+        List<Campaign> toDisplay = new ArrayList<>();
+        campaignRepository.findAll().forEach(allCampaigns :: add);
+
+        for (int i = 0; i < n; i++)
+            toDisplay.add(allCampaigns.get(i));
+
+        return toDisplay;
+    }
+
 
 }
