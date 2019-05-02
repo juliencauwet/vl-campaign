@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "ms-topics", url = "http://localhost:8641/topics")
 public interface TopicProxy {
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     Topic getTopicById(@PathVariable("id") int id);
 }

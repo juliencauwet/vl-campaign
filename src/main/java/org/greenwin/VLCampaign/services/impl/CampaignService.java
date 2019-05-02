@@ -3,6 +3,7 @@ package org.greenwin.VLCampaign.services.impl;
 import org.greenwin.VLCampaign.model.Campaign;
 import org.greenwin.VLCampaign.repository.CampaignRepository;
 import org.greenwin.VLCampaign.services.ICampaignService;
+import org.greenwin.VLCampaign.utils.CampaignUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,12 @@ public class CampaignService implements ICampaignService {
 
     @Autowired
     private CampaignRepository campaignRepository;
+
+    @Autowired
+    private OptionService optionService;
+
+    @Autowired
+    private CampaignUtil campaignUtil;
 
     public Campaign addCampaign(Campaign campaign){
         return campaignRepository.save(campaign);
@@ -38,6 +45,11 @@ public class CampaignService implements ICampaignService {
         for (int i = 0; i < n; i++)
             toDisplay.add(allCampaigns.get(i));
 
+        for (Campaign campaign : toDisplay
+             ) {
+            campaign.setOptions(optionService.getAllByCampaign(campaign));
+            campaignUtil.fillWithTopic(campaign);
+        }
         return toDisplay;
     }
 

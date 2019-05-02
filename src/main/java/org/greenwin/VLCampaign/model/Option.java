@@ -13,12 +13,13 @@ import java.util.List;
 @NoArgsConstructor
 public class Option {
 
-    public Option(String option){
+    public Option(String option, Campaign campaign){
         this.option = option;
+        this.campaign = campaign;
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String option;
@@ -30,6 +31,7 @@ public class Option {
     )
     private List<Vote> votes;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(
             name = "campaign"

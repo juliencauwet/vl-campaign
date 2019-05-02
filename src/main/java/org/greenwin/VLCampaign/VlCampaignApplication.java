@@ -15,7 +15,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @SpringBootApplication
 @EnableFeignClients("org.greenwin")
@@ -38,17 +40,6 @@ public class VlCampaignApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Option pos = new Option("oui");
-		Option neg = new Option("non");
-		Option white = new Option("blanc");
-
-
-		List<Option> referundumOptions = Arrays.asList(
-				pos,
-				neg,
-				white
-		);
-
 		Campaign campaign1 = new Campaign();
 		campaign1.setTopicId(1);
 		campaign1.setStartDate(LocalDate.of(2019, 6, 1));
@@ -69,20 +60,22 @@ public class VlCampaignApplication implements CommandLineRunner {
 		campaign4.setStartDate(LocalDate.of(2019, 10, 1));
 		campaign4.setEndDate(LocalDate.of(2019, 11,30));
 
-
-		Vote vote1 = new Vote(1, campaign1, pos);
-		Vote vote2 = new Vote(2, campaign1, neg);
-		Vote vote3 = new Vote(1, campaign1, white);
-
-		optionRepository.save(pos);
-		optionRepository.save(neg);
-		optionRepository.save(white);
+		Option pos = new Option("oui", campaign1);
+		Option neg = new Option("non", campaign1);
+		Option white = new Option("blanc", campaign1);
 
 		campaignRepository.save(campaign1);
 		campaignRepository.save(campaign2);
 		campaignRepository.save(campaign3);
 		campaignRepository.save(campaign4);
 
+		optionRepository.save(pos);
+		optionRepository.save(neg);
+		optionRepository.save(white);
+
+		Vote vote1 = new Vote(1, campaign1, pos);
+		Vote vote2 = new Vote(2, campaign1, neg);
+		Vote vote3 = new Vote(1, campaign1, white);
 
 		voteRepository.save(vote1);
 		voteRepository.save(vote2);
