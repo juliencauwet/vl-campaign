@@ -28,7 +28,9 @@ public class CampaignService implements ICampaignService {
     }
 
     public Campaign findById(int id){
-        return campaignRepository.findById(id);
+        Campaign campaign = campaignRepository.findById(id);
+        campaignUtil.fillWithTopic(campaign);
+        return campaign;
     }
 
     /**

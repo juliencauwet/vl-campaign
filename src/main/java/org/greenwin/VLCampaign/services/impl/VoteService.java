@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,8 @@ public class VoteService implements IVoteService {
     }
 
     public Vote saveVote(Vote vote){
+        vote.setDate(LocalDate.now());
+
         return voteRepository.save(vote);
     }
 }

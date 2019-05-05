@@ -11,4 +11,6 @@ import java.util.Set;
 public interface OptionRepository extends JpaRepository<Option, Integer> {
 
     Set<Option> findAllByCampaign(Campaign campaign);
+
+    Option getById(int id);
 }

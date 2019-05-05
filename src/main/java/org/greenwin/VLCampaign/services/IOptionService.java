@@ -8,4 +8,6 @@ import java.util.Set;
 public interface IOptionService {
 
     Set<Option> getAllByCampaign(Campaign campaign);
+
+    Option getOptionById(int id);
 }

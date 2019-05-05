@@ -21,4 +21,9 @@ public class OptionService implements IOptionService {
         return optionRepository.findAllByCampaign(campaign);
 
     }
+
+    @Override
+    public Option getOptionById(int id) {
+        return optionRepository.getById(id);
+    }
 }
