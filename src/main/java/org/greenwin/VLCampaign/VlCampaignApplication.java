@@ -63,23 +63,44 @@ public class VlCampaignApplication implements CommandLineRunner {
 		Option pos = new Option("oui", campaign1);
 		Option neg = new Option("non", campaign1);
 		Option white = new Option("blanc", campaign1);
-
-		campaignRepository.save(campaign1);
-		campaignRepository.save(campaign2);
-		campaignRepository.save(campaign3);
-		campaignRepository.save(campaign4);
-
-		optionRepository.save(pos);
-		optionRepository.save(neg);
-		optionRepository.save(white);
+		Option c2o1 = new Option("Accepter les revendications", campaign2);
+		Option c2o2 = new Option("Provoquer un référundum", campaign2);
+		Option c2o3 = new Option("Ne céder sous aucun prétexte", campaign2);
+		Option c3o1 = new Option("Interdire tous les produits toxiques", campaign3);
+		Option c3o2 = new Option("Prendre des mesures de nettoyage", campaign3);
+		Option c3o3 = new Option("Taxer les entreprises", campaign3);
+		Option c4o1 = new Option("Investir dans les technologies", campaign4);
+		Option c4o2 = new Option("Promouvoir l'artisanat", campaign4);
 
 		Vote vote1 = new Vote(1, campaign1, pos);
 		Vote vote2 = new Vote(2, campaign1, neg);
 		Vote vote3 = new Vote(1, campaign1, white);
 
-		voteRepository.save(vote1);
-		voteRepository.save(vote2);
-		voteRepository.save(vote3);
+		List<Campaign> campaigns = Arrays.asList(campaign1, campaign2, campaign3, campaign4);
+		saveCampaigns(campaigns);
+
+		List<Option> options = Arrays.asList(pos, neg, white, c2o1, c2o2, c2o3, c3o1, c3o2, c3o3, c4o1, c4o2);
+		saveOptions(options);
+
+		List<Vote> votes = Arrays.asList(vote1, vote2, vote3);
+		saveVotes(votes);
+
 
 	}
+
+	public void saveOptions (List<Option> options){
+		for (Option option : options)
+			optionRepository.save(option);
+	}
+
+	public void saveCampaigns (List<Campaign> campaigns){
+		for (Campaign campaign : campaigns)
+			campaignRepository.save(campaign);
+	}
+
+	public void saveVotes (List<Vote> votes){
+		for (Vote vote : votes)
+			voteRepository.save(vote);
+	}
+
 }
