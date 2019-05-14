@@ -32,7 +32,7 @@ public class Campaign {
     private LocalDate endDate;
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "campaign")
+    @OneToMany(cascade = CascadeType.DETACH, mappedBy = "campaign")
     private Set<Option> options = new HashSet<>();
 
 

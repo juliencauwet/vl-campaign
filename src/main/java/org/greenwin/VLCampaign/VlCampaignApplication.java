@@ -18,6 +18,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @SpringBootApplication
 @EnableFeignClients("org.greenwin")
@@ -60,6 +62,7 @@ public class VlCampaignApplication implements CommandLineRunner {
 		campaign4.setStartDate(LocalDate.of(2019, 10, 1));
 		campaign4.setEndDate(LocalDate.of(2019, 11,30));
 
+		/*
 		Option pos = new Option("oui", campaign1);
 		Option neg = new Option("non", campaign1);
 		Option white = new Option("blanc", campaign1);
@@ -71,13 +74,27 @@ public class VlCampaignApplication implements CommandLineRunner {
 		Option c3o3 = new Option("Taxer les entreprises", campaign3);
 		Option c4o1 = new Option("Investir dans les technologies", campaign4);
 		Option c4o2 = new Option("Promouvoir l'artisanat", campaign4);
+		*/
+
+		Option pos = new Option("oui");
+		Option neg = new Option("non");
+		Option white = new Option("blanc");
+		Option c2o1 = new Option("Accepter les revendications");
+		Option c2o2 = new Option("Provoquer un référundum");
+		Option c2o3 = new Option("Ne céder sous aucun prétexte");
+		Option c3o1 = new Option("Interdire tous les produits toxiques");
+		Option c3o2 = new Option("Prendre des mesures de nettoyage");
+		Option c3o3 = new Option("Taxer les entreprises");
+		Option c4o1 = new Option("Investir dans les technologies");
+		Option c4o2 = new Option("Promouvoir l'artisanat");
+
+		List<Campaign> campaigns = Arrays.asList(campaign1, campaign2, campaign3, campaign4);
+		saveCampaigns(campaigns);
 
 		Vote vote1 = new Vote(1, campaign1, pos);
 		Vote vote2 = new Vote(2, campaign1, neg);
 		Vote vote3 = new Vote(1, campaign1, white);
 
-		List<Campaign> campaigns = Arrays.asList(campaign1, campaign2, campaign3, campaign4);
-		saveCampaigns(campaigns);
 
 		List<Option> options = Arrays.asList(pos, neg, white, c2o1, c2o2, c2o3, c3o1, c3o2, c3o3, c4o1, c4o2);
 		saveOptions(options);

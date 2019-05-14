@@ -46,12 +46,6 @@ public class CampaignService implements ICampaignService {
 
         for (int i = 0; i < n; i++)
             toDisplay.add(allCampaigns.get(i));
-
-        for (Campaign campaign : toDisplay
-             ) {
-            campaign.setOptions(optionService.getAllByCampaign(campaign));
-            campaignUtil.fillWithTopic(campaign);
-        }
         return toDisplay;
     }
 

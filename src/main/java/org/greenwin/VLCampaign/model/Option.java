@@ -13,9 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 public class Option {
 
-    public Option(String option, Campaign campaign){
+    //public Option(String option, Campaign campaign){
+    public Option(String option){
         this.option = option;
-        this.campaign = campaign;
+        //this.campaign = campaign;
     }
 
     @Id
@@ -24,6 +25,7 @@ public class Option {
 
     private String option;
 
+
     @JsonIgnore
     @OneToMany(
             cascade = CascadeType.PERSIST,
@@ -31,12 +33,12 @@ public class Option {
     )
     private List<Vote> votes;
 
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(
             name = "campaign"
     )
-
     private Campaign campaign;
 
 }
