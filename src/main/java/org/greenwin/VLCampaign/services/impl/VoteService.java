@@ -1,8 +1,11 @@
 package org.greenwin.VLCampaign.services.impl;
 
 import org.greenwin.VLCampaign.beans.AppUser;
+import org.greenwin.VLCampaign.exceptions.DuplicateVoteException;
+import org.greenwin.VLCampaign.model.Campaign;
 import org.greenwin.VLCampaign.model.Vote;
 import org.greenwin.VLCampaign.proxies.UserProxy;
+import org.greenwin.VLCampaign.repository.CampaignRepository;
 import org.greenwin.VLCampaign.repository.VoteRepository;
 import org.greenwin.VLCampaign.services.IVoteService;
 import org.slf4j.Logger;
@@ -19,6 +22,9 @@ public class VoteService implements IVoteService {
 
     @Autowired
     private VoteRepository voteRepository;
+
+    @Autowired
+    CampaignRepository campaignRepository;
 
     @Autowired
     private UserProxy userProxy;
@@ -46,8 +52,20 @@ public class VoteService implements IVoteService {
         return votes;
     }
 
+    /**
+     * check if no duplicate vote, if so deny
+     * @param vote
+     * @return
+     */
     public Vote saveVote(Vote vote){
         vote.setDate(LocalDate.now());
+        List <Vote> userVotes = voteRepository.getAllByCampaign(vote.getCampaign());
+        logger.info("save vote");
+        for (Vote v: userVotes) {
+            logger.info("date début: " + v. getCampaign().getStartDate());
+            if (v.getUserId() == vote.getUserId())
+                throw new DuplicateVoteException();
+        }
 
         return voteRepository.save(vote);
     }

@@ -12,4 +12,5 @@ public interface CampaignRepository extends JpaRepository<Campaign, Integer> {
         Campaign findById(int id);
         List<Campaign> findAllByOrderByStartDateDesc();
 
+
 }
