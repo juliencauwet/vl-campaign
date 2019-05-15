@@ -3,6 +3,7 @@ package org.greenwin.VLCampaign.services.impl;
 import org.greenwin.VLCampaign.beans.AppUser;
 import org.greenwin.VLCampaign.exceptions.DuplicateVoteException;
 import org.greenwin.VLCampaign.model.Campaign;
+import org.greenwin.VLCampaign.model.Option;
 import org.greenwin.VLCampaign.model.Vote;
 import org.greenwin.VLCampaign.proxies.UserProxy;
 import org.greenwin.VLCampaign.repository.CampaignRepository;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class VoteService implements IVoteService {
@@ -69,4 +72,22 @@ public class VoteService implements IVoteService {
 
         return voteRepository.save(vote);
     }
+
+    /**
+     * fetch all votes per campaign and sorts the results by options
+     * @param campaign
+     * @return a map of the results per campaign
+     */
+    @Override
+    public Map<Option, Integer> getVotesByCampaign(Campaign campaign) {
+        Map<Option, Integer> results = new HashMap<>();
+        List<Vote> votes =  voteRepository.getAllByCampaign(campaign);
+        for(Vote vote : votes){
+            
+            results.put(vote.getOption(), results.get(vote.getOption()) + 1);
+        }
+        return results;
+    }
+
+
 }

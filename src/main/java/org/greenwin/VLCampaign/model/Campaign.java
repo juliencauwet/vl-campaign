@@ -5,7 +5,9 @@ import org.greenwin.VLCampaign.beans.Topic;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,7 +35,7 @@ public class Campaign {
 
 
     @OneToMany(cascade = CascadeType.DETACH, mappedBy = "campaign")
-    private Set<Option> options = new HashSet<>();
+    private List<Option> options = new ArrayList<>();
 
 
 }

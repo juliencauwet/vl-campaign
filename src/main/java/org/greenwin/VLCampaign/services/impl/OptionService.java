@@ -17,11 +17,9 @@ public class OptionService implements IOptionService {
     OptionRepository optionRepository;
 
     @Override
-    public Set<Option> getAllByCampaign(Campaign campaign) {
+    public List<Option> getAllByCampaign(Campaign campaign) {
         return optionRepository.findAllByCampaign(campaign);
-
     }
-
 
     @Override
     public Option getOptionById(int id) {

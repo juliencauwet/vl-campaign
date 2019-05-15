@@ -62,7 +62,7 @@ public class VlCampaignApplication implements CommandLineRunner {
 		campaign4.setStartDate(LocalDate.of(2019, 10, 1));
 		campaign4.setEndDate(LocalDate.of(2019, 11,30));
 
-		/*
+
 		Option pos = new Option("oui", campaign1);
 		Option neg = new Option("non", campaign1);
 		Option white = new Option("blanc", campaign1);
@@ -74,8 +74,8 @@ public class VlCampaignApplication implements CommandLineRunner {
 		Option c3o3 = new Option("Taxer les entreprises", campaign3);
 		Option c4o1 = new Option("Investir dans les technologies", campaign4);
 		Option c4o2 = new Option("Promouvoir l'artisanat", campaign4);
-		*/
 
+		/*
 		Option pos = new Option("oui");
 		Option neg = new Option("non");
 		Option white = new Option("blanc");
@@ -87,6 +87,7 @@ public class VlCampaignApplication implements CommandLineRunner {
 		Option c3o3 = new Option("Taxer les entreprises");
 		Option c4o1 = new Option("Investir dans les technologies");
 		Option c4o2 = new Option("Promouvoir l'artisanat");
+		*/
 
 		List<Campaign> campaigns = Arrays.asList(campaign1, campaign2, campaign3, campaign4);
 		saveCampaigns(campaigns);

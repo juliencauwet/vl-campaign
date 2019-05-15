@@ -13,10 +13,9 @@ import java.util.List;
 @NoArgsConstructor
 public class Option {
 
-    //public Option(String option, Campaign campaign){
-    public Option(String option){
+    public Option(String option, Campaign campaign){
         this.option = option;
-        //this.campaign = campaign;
+        this.campaign = campaign;
     }
 
     @Id
@@ -24,7 +23,6 @@ public class Option {
     private int id;
 
     private String option;
-
 
     @JsonIgnore
     @OneToMany(
