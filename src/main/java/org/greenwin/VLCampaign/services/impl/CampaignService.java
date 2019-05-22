@@ -4,6 +4,8 @@ import org.greenwin.VLCampaign.model.Campaign;
 import org.greenwin.VLCampaign.repository.CampaignRepository;
 import org.greenwin.VLCampaign.services.ICampaignService;
 import org.greenwin.VLCampaign.utils.CampaignUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ import java.util.List;
 
 @Service
 public class CampaignService implements ICampaignService {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private CampaignRepository campaignRepository;
@@ -24,11 +28,15 @@ public class CampaignService implements ICampaignService {
     private CampaignUtil campaignUtil;
 
     public Campaign addCampaign(Campaign campaign){
+        logger.info("### addCampaign method ###");
         return campaignRepository.save(campaign);
     }
 
     public Campaign findById(int id){
+        logger.info("### findById method ###");
+        logger.info("id: " + id );
         Campaign campaign = campaignRepository.findById(id);
+        logger.info("campaign: " + campaign);
         campaignUtil.fillWithTopic(campaign);
         return campaign;
     }
@@ -39,7 +47,7 @@ public class CampaignService implements ICampaignService {
      * @return n most recent campaigns
      */
     public List<Campaign> getnMostRecent(int n){
-
+        logger.info("### getMostRecent method ###");
         List<Campaign> allCampaigns = new ArrayList<>();
         List<Campaign> toDisplay = new ArrayList<>();
         campaignRepository.findAllByOrderByStartDateDesc().forEach(allCampaigns :: add);
@@ -56,6 +64,7 @@ public class CampaignService implements ICampaignService {
      */
     @Override
     public List<Campaign> getnMostPopular(int n) {
+        logger.info("### getMostPopular method ###");
         List<Campaign> allCampaigns = new ArrayList<>();
         List<Campaign> toDisplay = new ArrayList<>();
         campaignRepository.findAll().forEach(allCampaigns :: add);
@@ -65,6 +74,17 @@ public class CampaignService implements ICampaignService {
 
         return toDisplay;
     }
+
+    /**
+     *
+     * @param campaign
+     * @return
+     */
+    public Campaign updateCampaign(Campaign campaign){
+        logger.info("### updateCampaign method ###");
+        return campaignRepository.save(campaign);
+    }
+
 
 
 }

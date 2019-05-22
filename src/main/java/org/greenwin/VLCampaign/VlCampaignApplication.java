@@ -15,11 +15,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @SpringBootApplication
 @EnableFeignClients("org.greenwin")
@@ -44,21 +40,25 @@ public class VlCampaignApplication implements CommandLineRunner {
 
 		Campaign campaign1 = new Campaign();
 		campaign1.setTopicId(1);
+		campaign1.setQuestion("Voulez-vous sortir de l'Europe?");
 		campaign1.setStartDate(LocalDate.of(2019, 6, 1));
 		campaign1.setEndDate(LocalDate.of(2019, 8,31));
 
 		Campaign campaign2 = new Campaign();
 		campaign2.setTopicId(2);
+		campaign2.setQuestion("Comment souhaitez-vous répondre aux reventications des gilets jaunes?");
 		campaign2.setStartDate(LocalDate.of(2019, 5, 1));
 		campaign2.setEndDate(LocalDate.of(2019, 7,31));
 
 		Campaign campaign3 = new Campaign();
 		campaign3.setTopicId(3);
+		campaign3.setQuestion("Comment solutionner le problème des boues rouges?");
 		campaign3.setStartDate(LocalDate.of(2019, 7, 1));
 		campaign3.setEndDate(LocalDate.of(2019, 7,31));
 
 		Campaign campaign4 = new Campaign();
 		campaign4.setTopicId(4);
+		campaign4.setQuestion("Comment anticiper la cohabitation avec les robots?");
 		campaign4.setStartDate(LocalDate.of(2019, 10, 1));
 		campaign4.setEndDate(LocalDate.of(2019, 11,30));
 
@@ -75,35 +75,33 @@ public class VlCampaignApplication implements CommandLineRunner {
 		Option c4o1 = new Option("Investir dans les technologies", campaign4);
 		Option c4o2 = new Option("Promouvoir l'artisanat", campaign4);
 
-		/*
-		Option pos = new Option("oui");
-		Option neg = new Option("non");
-		Option white = new Option("blanc");
-		Option c2o1 = new Option("Accepter les revendications");
-		Option c2o2 = new Option("Provoquer un référundum");
-		Option c2o3 = new Option("Ne céder sous aucun prétexte");
-		Option c3o1 = new Option("Interdire tous les produits toxiques");
-		Option c3o2 = new Option("Prendre des mesures de nettoyage");
-		Option c3o3 = new Option("Taxer les entreprises");
-		Option c4o1 = new Option("Investir dans les technologies");
-		Option c4o2 = new Option("Promouvoir l'artisanat");
-		*/
 
 		List<Campaign> campaigns = Arrays.asList(campaign1, campaign2, campaign3, campaign4);
 		saveCampaigns(campaigns);
 
 		Vote vote1 = new Vote(1, campaign1, pos);
 		Vote vote2 = new Vote(2, campaign1, neg);
-		Vote vote3 = new Vote(1, campaign1, white);
+		Vote vote3 = new Vote(3, campaign1, white);
+		Vote vote4 = new Vote(4, campaign2, c2o1);
+		Vote vote5 = new Vote(2, campaign2, c2o2);
+		Vote vote6 = new Vote(6, campaign1, neg);
+		Vote vote7 = new Vote(5, campaign1, pos);
+		Vote vote8 = new Vote(2, campaign4, c4o1);
+		Vote vote9 = new Vote(4, campaign3, c3o1);
+		Vote vote10 = new Vote(7, campaign1, white);
+		Vote vote11 = new Vote(1, campaign3, c3o3);
+		Vote vote12 = new Vote(1, campaign4, c4o1);
+		Vote vote13 = new Vote(2, campaign3, c3o1);
+		Vote vote14 = new Vote(5, campaign2, c2o2);
+		Vote vote15 = new Vote(4, campaign1, white);
+
 
 
 		List<Option> options = Arrays.asList(pos, neg, white, c2o1, c2o2, c2o3, c3o1, c3o2, c3o3, c4o1, c4o2);
 		saveOptions(options);
 
-		List<Vote> votes = Arrays.asList(vote1, vote2, vote3);
+		List<Vote> votes = Arrays.asList(vote1, vote2, vote3, vote4, vote5, vote6, vote7, vote8, vote9, vote10, vote11, vote12, vote13, vote14, vote15);
 		saveVotes(votes);
-
-
 	}
 
 	public void saveOptions (List<Option> options){

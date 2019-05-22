@@ -21,6 +21,8 @@ public class Campaign {
     @GeneratedValue
     private int id;
 
+    String question;
+
     @Transient
     private Topic topic;
 

@@ -76,16 +76,14 @@ public class VoteService implements IVoteService {
     /**
      * fetch all votes per campaign and sorts the results by options
      * @param campaign
-     * @return a map of the results per campaign
+     * @return a map '<option_id, nbvotes>' of the results per campaign
      */
     @Override
-    public Map<Option, Integer> getVotesByCampaign(Campaign campaign) {
-        Map<Option, Integer> results = new HashMap<>();
+    public Map<Integer, Integer> getVotesByCampaign(Campaign campaign) {
+        Map<Integer, Integer> results = new HashMap<>();
         List<Vote> votes =  voteRepository.getAllByCampaign(campaign);
-        for(Vote vote : votes){
-            
-            results.put(vote.getOption(), results.get(vote.getOption()) + 1);
-        }
+        for(Vote vote : votes)
+            results.put(vote.getOption().getId(), !results.containsKey(vote.getOption().getId())? 1 : results.get(vote.getOption().getId()) + 1);
         return results;
     }
 

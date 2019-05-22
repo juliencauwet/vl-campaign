@@ -12,6 +12,6 @@ public interface IVoteService {
     Vote getVoteById(int id);
     List<Vote> getAllVotes();
     Vote saveVote(Vote vote);
-    Map<Option, Integer> getVotesByCampaign(Campaign campaign);
+    Map<Integer, Integer> getVotesByCampaign(Campaign campaign);
 
 }

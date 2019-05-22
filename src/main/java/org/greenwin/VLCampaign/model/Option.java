@@ -31,6 +31,7 @@ public class Option {
     )
     private List<Vote> votes;
 
+    private int campaignId;
 
     @JsonIgnore
     @ManyToOne

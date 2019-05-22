@@ -10,6 +10,7 @@ import org.greenwin.VLCampaign.services.impl.VoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,17 +28,15 @@ public class CampaignController {
     @Autowired
     private VoteService voteService;
 
-    @Autowired
-    private VoteRepository voteRepository;
-
     /**
      * add a campaign
      * @param campaign
      * @return campaign created
      */
-    @PostMapping("/")
+    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Campaign addCampaign(@RequestBody Campaign campaign){
         logger.info("### addCampaign method ###");
+        logger.info("campagne: " + campaign.getQuestion() + " ," + campaign.getTopicId());
         return campaignService.addCampaign(campaign);
     }
 
@@ -46,7 +45,7 @@ public class CampaignController {
      * @param id
      * @return
      */
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public  Campaign getCampaignById(@PathVariable ("id") int id){
         logger.info("### getCampaignById method ###");
         return campaignService.findById(id);
@@ -56,7 +55,7 @@ public class CampaignController {
      * get most recent campaigns
      * @return specified numbers of recent campaigns
      */
-    @GetMapping("/recent")
+    @GetMapping(value = "/recent", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Campaign> getMostRecentCampaigns(){
         logger.info("### getMostRecentCampaigns method ###");
         return campaignService.getnMostRecent(3);
@@ -67,10 +66,22 @@ public class CampaignController {
      * @param id
      * @return a map with results
      */
-    @GetMapping("/results/{id}")
-    public Map<Option, Integer> getCampaignResults(@PathVariable ("id") int id){
+    @GetMapping(value = "/results/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Map<Integer, Integer> getCampaignResults(@PathVariable ("id") int id){
+        logger.info("### getCampaignResults method ###");
         Campaign campaign = campaignService.findById(id);
         return voteService.getVotesByCampaign(campaign);
+    }
+
+    /**
+     *
+     * @param c
+     * @return
+     */
+    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Campaign updateCampaign(@RequestBody Campaign c){
+        Campaign campaign = campaignService.findById(c.getId());
+        return campaignService.updateCampaign(campaign);
     }
 
 }

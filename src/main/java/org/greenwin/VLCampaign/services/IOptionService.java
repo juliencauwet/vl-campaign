@@ -10,4 +10,6 @@ public interface IOptionService {
     List<Option> getAllByCampaign(Campaign campaign);
 
     Option getOptionById(int id);
+
+    Option saveOption(Option option);
 }
