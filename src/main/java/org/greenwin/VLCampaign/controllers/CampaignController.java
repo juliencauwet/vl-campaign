@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.dsig.spec.C14NMethodParameterSpec;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -82,6 +85,13 @@ public class CampaignController {
     public Campaign updateCampaign(@RequestBody Campaign c){
         Campaign campaign = campaignService.findById(c.getId());
         return campaignService.updateCampaign(campaign);
+    }
+
+    @PostMapping(value = "/select", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Campaign> selectCampaign(@RequestBody Campaign campaign){
+
+        List<Campaign> campaigns = campaignService.selectCampaigns(campaign.getStartDate(), campaign.getEndDate(), "s");
+        return campaigns;
     }
 
 }

@@ -1,6 +1,10 @@
 package org.greenwin.VLCampaign.services.impl;
 
+import com.netflix.discovery.converters.Auto;
+import org.apache.tomcat.jni.Local;
+import org.greenwin.VLCampaign.beans.Topic;
 import org.greenwin.VLCampaign.model.Campaign;
+import org.greenwin.VLCampaign.proxies.TopicProxy;
 import org.greenwin.VLCampaign.repository.CampaignRepository;
 import org.greenwin.VLCampaign.services.ICampaignService;
 import org.greenwin.VLCampaign.utils.CampaignUtil;
@@ -9,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +27,12 @@ public class CampaignService implements ICampaignService {
     private CampaignRepository campaignRepository;
 
     @Autowired
-    private OptionService optionService;
+    private TopicProxy topicProxy;
 
     @Autowired
     private CampaignUtil campaignUtil;
+
+
 
     public Campaign addCampaign(Campaign campaign){
         logger.info("### addCampaign method ###");
@@ -83,6 +90,19 @@ public class CampaignService implements ICampaignService {
     public Campaign updateCampaign(Campaign campaign){
         logger.info("### updateCampaign method ###");
         return campaignRepository.save(campaign);
+    }
+
+    public List<Campaign> selectCampaigns(LocalDate start, LocalDate end, String keyword){
+        List<Campaign> campaigns = campaignRepository.findByStartDateAfterAndEndDateBefore(start, end);
+        List<Campaign> selectedCampaigns = new ArrayList<>();
+        List<Topic> topics = topicProxy.getTopicsByKeyWord(keyword);
+
+        for (Campaign campaign : campaigns){
+            campaign.setTopic(topicProxy.getTopicById(campaign.getTopicId()));
+            if(campaign.getTopic().getSummary().contains(keyword))
+                selectedCampaigns.add(campaign);
+        }
+        return selectedCampaigns;
     }
 
 
