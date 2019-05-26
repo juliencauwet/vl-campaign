@@ -1,10 +1,6 @@
 package org.greenwin.VLCampaign.controllers;
 
-import com.netflix.discovery.converters.Auto;
 import org.greenwin.VLCampaign.model.Campaign;
-import org.greenwin.VLCampaign.model.Option;
-import org.greenwin.VLCampaign.model.Vote;
-import org.greenwin.VLCampaign.repository.VoteRepository;
 import org.greenwin.VLCampaign.services.impl.CampaignService;
 import org.greenwin.VLCampaign.services.impl.VoteService;
 import org.slf4j.Logger;
@@ -12,10 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import javax.xml.crypto.dsig.spec.C14NMethodParameterSpec;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -87,11 +79,18 @@ public class CampaignController {
         return campaignService.updateCampaign(campaign);
     }
 
+    /**
+     * select a list of campaign matching some campaign properties
+     * @param campaign
+     * @return
+     */
     @PostMapping(value = "/select", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Campaign> selectCampaign(@RequestBody Campaign campaign){
-
+        //TODO: adjust
         List<Campaign> campaigns = campaignService.selectCampaigns(campaign.getStartDate(), campaign.getEndDate(), "s");
         return campaigns;
     }
+
+
 
 }

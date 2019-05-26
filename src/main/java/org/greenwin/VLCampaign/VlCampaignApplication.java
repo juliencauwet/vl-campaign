@@ -1,9 +1,11 @@
 package org.greenwin.VLCampaign;
 
 import org.greenwin.VLCampaign.model.Campaign;
+import org.greenwin.VLCampaign.model.Category;
 import org.greenwin.VLCampaign.model.Option;
 import org.greenwin.VLCampaign.model.Vote;
 import org.greenwin.VLCampaign.repository.CampaignRepository;
+import org.greenwin.VLCampaign.repository.CategoryRepository;
 import org.greenwin.VLCampaign.repository.OptionRepository;
 import org.greenwin.VLCampaign.repository.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,29 +37,48 @@ public class VlCampaignApplication implements CommandLineRunner {
 	@Autowired
 	private CampaignRepository campaignRepository;
 
+	@Autowired
+	private CategoryRepository categoryRepository;
+
 	@Override
 	public void run(String... args) throws Exception {
 
+		Category politics = new Category("politique");
+		Category economy = new Category("économie");
+		Category education = new Category("éducation");
+		Category health = new Category("santé");
+		Category defence = new Category("défense");
+		Category ecology = new Category("écologie");
+		Category technology = new Category("technologie");
+
+		List<Category> categories = Arrays.asList(politics, economy, education, health, defence, ecology, technology);
+
+		saveCategory(categories);
+
 		Campaign campaign1 = new Campaign();
 		campaign1.setTopicId(1);
+		campaign1.setCategory(politics);
 		campaign1.setQuestion("Voulez-vous sortir de l'Europe?");
 		campaign1.setStartDate(LocalDate.of(2019, 6, 1));
 		campaign1.setEndDate(LocalDate.of(2019, 8,31));
 
 		Campaign campaign2 = new Campaign();
 		campaign2.setTopicId(2);
+		campaign2.setCategory(economy);
 		campaign2.setQuestion("Comment souhaitez-vous répondre aux reventications des gilets jaunes?");
 		campaign2.setStartDate(LocalDate.of(2019, 5, 1));
 		campaign2.setEndDate(LocalDate.of(2019, 7,31));
 
 		Campaign campaign3 = new Campaign();
 		campaign3.setTopicId(3);
+		campaign3.setCategory(ecology);
 		campaign3.setQuestion("Comment solutionner le problème des boues rouges?");
 		campaign3.setStartDate(LocalDate.of(2019, 7, 1));
 		campaign3.setEndDate(LocalDate.of(2019, 7,31));
 
 		Campaign campaign4 = new Campaign();
 		campaign4.setTopicId(4);
+		campaign4.setCategory(technology);
 		campaign4.setQuestion("Comment anticiper la cohabitation avec les robots?");
 		campaign4.setStartDate(LocalDate.of(2019, 10, 1));
 		campaign4.setEndDate(LocalDate.of(2019, 11,30));
@@ -117,6 +138,11 @@ public class VlCampaignApplication implements CommandLineRunner {
 	public void saveVotes (List<Vote> votes){
 		for (Vote vote : votes)
 			voteRepository.save(vote);
+	}
+
+	public void saveCategory(List<Category> categories){
+		for (Category category : categories)
+			categoryRepository.save(category);
 	}
 
 }

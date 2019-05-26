@@ -28,7 +28,15 @@ public class Campaign {
 
     private int TopicId;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "campaign")
+    @ManyToOne
+    @JoinColumn(name = "category")
+    private Category category;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            mappedBy = "campaign"
+    )
     private Set<Vote> votes = new HashSet<>();
 
     private LocalDate startDate;
