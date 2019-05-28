@@ -38,6 +38,7 @@ public class Vote {
     @JoinColumn(name = "campaign")
     private  Campaign campaign;
 
+    private int campaignId;
 
     @ManyToOne
     @JoinColumn(name = "option")

@@ -41,15 +41,13 @@ public class CampaignService implements ICampaignService {
 
     public Campaign findById(int id){
         logger.info("### findById method ###");
-        logger.info("id: " + id );
         Campaign campaign = campaignRepository.findById(id);
-        logger.info("campaign: " + campaign);
         campaignUtil.fillWithTopic(campaign);
         return campaign;
     }
 
     /**
-     *
+     * select the n most recent campaigns
      * @param n
      * @return n most recent campaigns
      */
@@ -65,7 +63,7 @@ public class CampaignService implements ICampaignService {
     }
 
     /**
-     *
+     * get the campaign with the largest number of voters
      * @param n
      * @return n most popular campaigns
      */
@@ -93,8 +91,9 @@ public class CampaignService implements ICampaignService {
     }
 
     public List<Campaign> selectCampaigns(LocalDate start, LocalDate end, String keyword){
-        List<Campaign> campaigns = campaignRepository.findByStartDateAfterAndEndDateBefore(start, end);
-        List<Campaign> selectedCampaigns = new ArrayList<>();
+        List<Campaign> campaigns = campaignRepository.findByStartDateAfterAndEndDateBefore(start.minusDays(1), end.plusDays(1));
+        //List<Campaign> selectedCampaigns = new ArrayList<>();
+        /*
         List<Topic> topics = topicProxy.getTopicsByKeyWord(keyword);
 
         for (Campaign campaign : campaigns){
@@ -102,7 +101,8 @@ public class CampaignService implements ICampaignService {
             if(campaign.getTopic().getSummary().contains(keyword))
                 selectedCampaigns.add(campaign);
         }
-        return selectedCampaigns;
+        */
+        return campaigns;
     }
 
 

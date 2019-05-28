@@ -1,5 +1,6 @@
 package org.greenwin.VLCampaign.services;
 
+import org.greenwin.VLCampaign.beans.AppUser;
 import org.greenwin.VLCampaign.model.Campaign;
 import org.greenwin.VLCampaign.model.Option;
 import org.greenwin.VLCampaign.model.Vote;
@@ -13,5 +14,6 @@ public interface IVoteService {
     List<Vote> getAllVotes();
     Vote saveVote(Vote vote);
     Map<Integer, Integer> getVotesByCampaign(Campaign campaign);
+    Vote getVoteByUserAndCampaign(int userId, int campaignId);
 
 }

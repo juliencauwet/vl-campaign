@@ -62,10 +62,11 @@ public class VoteService implements IVoteService {
      */
     public Vote saveVote(Vote vote){
         vote.setDate(LocalDate.now());
+        vote.setCampaign(campaignRepository.findById(vote.getCampaignId()));
         List <Vote> userVotes = voteRepository.getAllByCampaign(vote.getCampaign());
         logger.info("save vote");
         for (Vote v: userVotes) {
-            logger.info("date début: " + v. getCampaign().getStartDate());
+            //logger.info("date début: " + v.getCampaign().getStartDate());
             if (v.getUserId() == vote.getUserId())
                 throw new DuplicateVoteException();
         }
@@ -85,6 +86,11 @@ public class VoteService implements IVoteService {
         for(Vote vote : votes)
             results.put(vote.getOption().getId(), !results.containsKey(vote.getOption().getId())? 1 : results.get(vote.getOption().getId()) + 1);
         return results;
+    }
+
+    @Override
+    public Vote getVoteByUserAndCampaign(int userId, int campaignId) {
+        return voteRepository.getVoteByUserIdAndAndCampaign(userId, campaignRepository.findById(campaignId));
     }
 
 

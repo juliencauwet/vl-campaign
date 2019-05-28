@@ -30,9 +30,16 @@ public class VoteController {
         return voteService.getVoteById(id);
     }
 
+    @GetMapping("/user/{userId}/campaign/{campaignId}")
+    public Vote getVoteByUserAndCampaign(@PathVariable("userId") int userId, @PathVariable("campaignId") int campaignId){
+        return voteService.getVoteByUserAndCampaign(userId, campaignId);
+    }
+
     @PostMapping("/")
     public Vote saveVote(@RequestBody Vote vote){
         return voteService.saveVote(vote);
     }
+
+
 
 }

@@ -50,8 +50,9 @@ public class VlCampaignApplication implements CommandLineRunner {
 		Category defence = new Category("défense");
 		Category ecology = new Category("écologie");
 		Category technology = new Category("technologie");
+		Category sport = new Category("sport");
 
-		List<Category> categories = Arrays.asList(politics, economy, education, health, defence, ecology, technology);
+		List<Category> categories = Arrays.asList(politics, economy, education, health, defence, ecology, technology, sport);
 
 		saveCategory(categories);
 
@@ -65,7 +66,7 @@ public class VlCampaignApplication implements CommandLineRunner {
 		Campaign campaign2 = new Campaign();
 		campaign2.setTopicId(2);
 		campaign2.setCategory(economy);
-		campaign2.setQuestion("Comment souhaitez-vous répondre aux reventications des gilets jaunes?");
+		campaign2.setQuestion("Comment souhaitez-vous répondre aux revendications des gilets jaunes?");
 		campaign2.setStartDate(LocalDate.of(2019, 5, 1));
 		campaign2.setEndDate(LocalDate.of(2019, 7,31));
 
@@ -82,6 +83,12 @@ public class VlCampaignApplication implements CommandLineRunner {
 		campaign4.setQuestion("Comment anticiper la cohabitation avec les robots?");
 		campaign4.setStartDate(LocalDate.of(2019, 10, 1));
 		campaign4.setEndDate(LocalDate.of(2019, 11,30));
+
+		Campaign testCampaign = new Campaign();
+		testCampaign.setCategory(sport);
+		testCampaign.setQuestion("test?");
+		testCampaign.setStartDate(LocalDate.of(2019, 5, 2));
+		testCampaign.setEndDate(LocalDate.of(2019, 5, 28));
 
 
 		Option pos = new Option("oui", campaign1);

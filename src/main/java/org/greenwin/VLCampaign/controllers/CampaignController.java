@@ -31,7 +31,6 @@ public class CampaignController {
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Campaign addCampaign(@RequestBody Campaign campaign){
         logger.info("### addCampaign method ###");
-        logger.info("campagne: " + campaign.getQuestion() + " ," + campaign.getTopicId());
         return campaignService.addCampaign(campaign);
     }
 
@@ -57,7 +56,7 @@ public class CampaignController {
     }
 
     /**
-     * gets results of a campaign sorted by options
+     * get results of a campaign sorted by options
      * @param id
      * @return a map with results
      */
@@ -69,7 +68,7 @@ public class CampaignController {
     }
 
     /**
-     *
+     * update a campaign
      * @param c
      * @return
      */
