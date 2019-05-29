@@ -82,6 +82,12 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4jVersion}</version>
 		</dependency>
+
+		<!-- ########## TEST - DESERIALIZATION ########## -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
