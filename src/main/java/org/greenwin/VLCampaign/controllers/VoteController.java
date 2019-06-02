@@ -1,6 +1,9 @@
 package org.greenwin.VLCampaign.controllers;
 
 
+import org.greenwin.VLCampaign.exceptions.DuplicateVoteException;
+import org.greenwin.VLCampaign.model.Campaign;
+import org.greenwin.VLCampaign.model.Option;
 import org.greenwin.VLCampaign.model.Vote;
 import org.greenwin.VLCampaign.services.impl.VoteService;
 import org.slf4j.Logger;
@@ -37,7 +40,12 @@ public class VoteController {
 
     @PostMapping("/")
     public Vote saveVote(@RequestBody Vote vote){
-        return voteService.saveVote(vote);
+        try {
+            return voteService.saveVote(vote);
+        }catch (DuplicateVoteException e){
+            return new Vote(-1, new Campaign(), new Option());
+        }
+
     }
 
 

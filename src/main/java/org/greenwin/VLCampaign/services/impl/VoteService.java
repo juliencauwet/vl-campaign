@@ -66,9 +66,10 @@ public class VoteService implements IVoteService {
         List <Vote> userVotes = voteRepository.getAllByCampaign(vote.getCampaign());
         logger.info("save vote");
         for (Vote v: userVotes) {
-            //logger.info("date début: " + v.getCampaign().getStartDate());
-            if (v.getUserId() == vote.getUserId())
+            logger.info("campagne du vote: " + v.getCampaign().getQuestion());
+            if (v.getUserId() == vote.getUserId()) {
                 throw new DuplicateVoteException();
+            }
         }
 
         return voteRepository.save(vote);

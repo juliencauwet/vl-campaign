@@ -1,9 +1,7 @@
 package org.greenwin.VLCampaign.services.impl;
 
-import com.netflix.discovery.converters.Auto;
-import org.apache.tomcat.jni.Local;
-import org.greenwin.VLCampaign.beans.Topic;
 import org.greenwin.VLCampaign.model.Campaign;
+import org.greenwin.VLCampaign.model.Category;
 import org.greenwin.VLCampaign.proxies.TopicProxy;
 import org.greenwin.VLCampaign.repository.CampaignRepository;
 import org.greenwin.VLCampaign.services.ICampaignService;
@@ -80,8 +78,13 @@ public class CampaignService implements ICampaignService {
         return toDisplay;
     }
 
+    @Override
+    public List<Campaign> searchCampaignByKeyWord(String key) {
+        return campaignRepository.getCampaignsByQuestionContainingIgnoreCase(key);
+    }
+
     /**
-     *
+     * update campaign
      * @param campaign
      * @return
      */
@@ -90,21 +93,15 @@ public class CampaignService implements ICampaignService {
         return campaignRepository.save(campaign);
     }
 
-    public List<Campaign> selectCampaigns(LocalDate start, LocalDate end, String keyword){
-        List<Campaign> campaigns = campaignRepository.findByStartDateAfterAndEndDateBefore(start.minusDays(1), end.plusDays(1));
-        //List<Campaign> selectedCampaigns = new ArrayList<>();
-        /*
-        List<Topic> topics = topicProxy.getTopicsByKeyWord(keyword);
+    public List<Campaign> selectCampaigns(LocalDate start, LocalDate end, Category category){
+        logger.info("### selectCampaigns method ###");
+        List<Campaign> campaigns;
+        if(category != null)
+            campaigns = campaignRepository.findByCategoryAndStartDateAfterAndEndDateBefore(category, start.minusDays(1), end.plusDays(1));
+        else
+            campaigns = campaignRepository.findByStartDateAfterAndEndDateBefore(start.minusDays(1), end.plusDays(1));
 
-        for (Campaign campaign : campaigns){
-            campaign.setTopic(topicProxy.getTopicById(campaign.getTopicId()));
-            if(campaign.getTopic().getSummary().contains(keyword))
-                selectedCampaigns.add(campaign);
-        }
-        */
         return campaigns;
     }
-
-
 
 }

@@ -10,4 +10,5 @@ public interface ICampaignService {
     Campaign findById(int id);
     List<Campaign> getnMostRecent(int n);
     List<Campaign> getnMostPopular(int n);
+    List<Campaign> searchCampaignByKeyWord(String key);
 }

@@ -86,10 +86,14 @@ public class CampaignController {
     @PostMapping(value = "/select", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Campaign> selectCampaign(@RequestBody Campaign campaign){
         //TODO: adjust
-        List<Campaign> campaigns = campaignService.selectCampaigns(campaign.getStartDate(), campaign.getEndDate(), "s");
+        List<Campaign> campaigns = campaignService.selectCampaigns(campaign.getStartDate(), campaign.getEndDate(), campaign.getCategory());
         return campaigns;
     }
 
+    @GetMapping(value = "/search/{keyword}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Campaign> searchCampaign(@PathVariable ("keyword") String keyword){
+        return campaignService.searchCampaignByKeyWord(keyword);
+    }
 
 
 }
