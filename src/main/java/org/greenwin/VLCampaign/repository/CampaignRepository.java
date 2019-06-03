@@ -14,10 +14,13 @@ public interface CampaignRepository extends JpaRepository<Campaign, Integer> {
         Campaign findById(int id);
         List<Campaign> findAllByOrderByStartDateDesc();
 
-        List<Campaign> findByCategoryAndStartDateAfterAndEndDateBefore(Category category, LocalDate start, LocalDate end);
-        List<Campaign> findByStartDateAfterAndEndDateBefore(LocalDate start, LocalDate end);
+        List<Campaign> findByCategoryAndStartDateBeforeAndEndDateAfter(Category category, LocalDate start, LocalDate end);
 
         List<Campaign> getCampaignsByQuestionContainingIgnoreCase(String keyword);
+
+        List<Campaign> getCampaignsByStartDateBeforeAndEndDateAfter(LocalDate start, LocalDate end);
+
+        List<Campaign> getCampaignsByStartDateAfter(LocalDate now);
 
 
 }

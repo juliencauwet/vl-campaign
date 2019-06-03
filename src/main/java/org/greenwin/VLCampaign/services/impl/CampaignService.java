@@ -45,6 +45,25 @@ public class CampaignService implements ICampaignService {
     }
 
     /**
+     * get ongoing campaigns
+     * @return
+     */
+    public List<Campaign> getnCurrentCampaigns(){
+        logger.info("### getnCurrentCampaigns method ###");
+        return campaignRepository.getCampaignsByStartDateBeforeAndEndDateAfter(LocalDate.now(), LocalDate.now());
+    }
+
+    /**
+     * get campaigns not started yet
+     * @return
+     */
+    public List<Campaign> getCampaignsComingNext(){
+        logger.info("### getCampaignsComingNext method ###");
+        return campaignRepository.getCampaignsByStartDateAfter(LocalDate.now());
+    }
+
+
+    /**
      * select the n most recent campaigns
      * @param n
      * @return n most recent campaigns
@@ -97,9 +116,9 @@ public class CampaignService implements ICampaignService {
         logger.info("### selectCampaigns method ###");
         List<Campaign> campaigns;
         if(category != null)
-            campaigns = campaignRepository.findByCategoryAndStartDateAfterAndEndDateBefore(category, start.minusDays(1), end.plusDays(1));
+            campaigns = campaignRepository.findByCategoryAndStartDateBeforeAndEndDateAfter(category, start.minusDays(1), end.plusDays(1));
         else
-            campaigns = campaignRepository.findByStartDateAfterAndEndDateBefore(start.minusDays(1), end.plusDays(1));
+            campaigns = campaignRepository.getCampaignsByStartDateBeforeAndEndDateAfter(start.minusDays(1), end.plusDays(1));
 
         return campaigns;
     }

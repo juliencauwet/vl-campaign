@@ -46,6 +46,26 @@ public class CampaignController {
     }
 
     /**
+     * get current campaigns
+     * @return specified numbers of recent campaigns
+     */
+    @GetMapping(value = "/current", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Campaign> getCurrentCampaigns(){
+        logger.info("### getCurrentCampaigns method ###");
+        return campaignService.getnCurrentCampaigns();
+    }
+
+    /**
+     * get next campaigns
+     * @return specified numbers of recent campaigns
+     */
+    @GetMapping(value = "/next", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Campaign> getNextCampaigns(){
+        logger.info("### getNextCampaigns method ###");
+        return campaignService.getCampaignsComingNext();
+    }
+
+    /**
      * get most recent campaigns
      * @return specified numbers of recent campaigns
      */
