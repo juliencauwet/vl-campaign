@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/votes")
+@CrossOrigin(origins = "http://localhost:4200")
 public class VoteController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());

@@ -40,7 +40,7 @@ public class CampaignService implements ICampaignService {
     public Campaign findById(int id){
         logger.info("### findById method ###");
         Campaign campaign = campaignRepository.findById(id);
-        campaignUtil.fillWithTopic(campaign);
+        //campaignUtil.fillWithTopic(campaign);
         return campaign;
     }
 

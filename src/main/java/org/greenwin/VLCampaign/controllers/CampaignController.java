@@ -13,6 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/campaign")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CampaignController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -110,6 +111,11 @@ public class CampaignController {
         return campaigns;
     }
 
+    /**
+     * search campaigns matching expression in campaign's question
+     * @param keyword
+     * @return the list of campaigns
+     */
     @GetMapping(value = "/search/{keyword}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Campaign> searchCampaign(@PathVariable ("keyword") String keyword){
         return campaignService.searchCampaignByKeyWord(keyword);

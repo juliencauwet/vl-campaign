@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/options")
+@CrossOrigin(origins = "http://localhost:4200")
 public class OptionController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
