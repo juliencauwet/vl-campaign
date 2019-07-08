@@ -117,9 +117,7 @@ public class CampaignController {
      * @return the list of campaigns
      */
     @GetMapping(value = "/search/{keyword}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<Campaign> searchCampaign(@PathVariable ("keyword") String keyword){
+    public List<Campaign> searchCampaign(@PathVariable ("keyword") String keyword) {
         return campaignService.searchCampaignByKeyWord(keyword);
     }
-
-
 }

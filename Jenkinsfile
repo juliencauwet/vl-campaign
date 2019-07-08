@@ -17,6 +17,7 @@ pipeline {
             }
 
         }
+        /*
         stage('Tests') {
                     steps {
                         sh 'mvn test'
@@ -30,7 +31,7 @@ pipeline {
                         }
                     }
         }
-
+        */
         stage('Deploy'){
             steps {
                 sh '''
