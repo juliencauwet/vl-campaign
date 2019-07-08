@@ -4,7 +4,6 @@ pipeline {
         maven 'Maven 3.6.0'
     }
     stages {
-
         stage('Checkout') {
             steps {
                 git 'https://github.com/juliencauwet/vl-campaign.git'
@@ -17,7 +16,19 @@ pipeline {
             }
 
         }
-
+        stage('Tests') {
+                            steps {
+                               sh 'mvn test'
+                            }
+                            post {
+                                always {
+                                    junit 'target/surefire-reports/**/*.xml'
+                                }
+                                failure {
+                                    error 'The tests failed'
+                                }
+                            }
+        }
 
         stage('Deploy'){
             steps {
