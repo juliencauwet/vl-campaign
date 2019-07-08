@@ -4,7 +4,7 @@ services:
     container_name: campaigns
     build:
       context: .
-    image: jaycecordon/vlcampaignss:0.0.1-SNAPSHOT
+    image: jaycecordon/vlcampaigns:0.0.1-SNAPSHOT
     ports:
       - "8642:8642"
 
