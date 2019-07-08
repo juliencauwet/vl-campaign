@@ -1,12 +1,12 @@
 version: '2'
 services:
-  #topics:
-  #  container_name: topics
-  #  build:
-  #    context: .
-  #  image: jaycecordon/vltopics:0.0.1-SNAPSHOT
-  #  ports:
-  #    - "8641:8641"
+  campaigns:
+    container_name: campaigns
+    build:
+      context: .
+    image: jaycecordon/vlcampaignss:0.0.1-SNAPSHOT
+    ports:
+      - "8642:8642"
 
   db-campaign:
     image: postgres:alpine
