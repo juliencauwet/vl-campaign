@@ -1,6 +1,5 @@
 package org.greenwin.VLCampaign.controllers;
 
-import org.greenwin.VLCampaign.model.Campaign;
 import org.greenwin.VLCampaign.model.Vote;
 import org.junit.Test;
 import org.springframework.http.MediaType;
@@ -11,6 +10,7 @@ import static org.junit.Assert.*;
 
 public class VoteControllerTest extends AbstractTestClass{
 
+    /*
     @Test
     public void getVotes() throws Exception{
         String uri = "/votes/";
@@ -19,6 +19,7 @@ public class VoteControllerTest extends AbstractTestClass{
         int status = mvcResult.getResponse().getStatus();
         assertEquals(200, status);
     }
+    */
 
     @Test
     public void getVoteById()throws Exception {

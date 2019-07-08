@@ -35,11 +35,12 @@ public class VoteServiceTest {
         Assert.assertEquals(4, voteService.getVoteById(21).getUserId());
     }
 
+    /*
     @Test
     public void getAllVotes() {
         Assert.assertTrue(voteService.getAllVotes().size() > 5);
     }
-
+    */
     @Test
     public void saveVote() {
         Vote vote = new Vote();
